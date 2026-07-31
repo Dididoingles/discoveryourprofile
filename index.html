@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Teste de Perfil de Aprendizagem | @dicarvalho.prof</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --mars-rubi: #c20000;
+            --mars-bg: #000000;
+            --mars-card: #0a0a0a;
+            --mars-border: #1a1a1a;
+            --mars-text: #ffffff;
+            --mars-text-dim: #a0a0a0;
+            --mars-glow: rgba(194, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--mars-bg);
+            color: var(--mars-text);
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: var(--mars-rubi);
+        }
+
+        .subtitle {
+            color: var(--mars-text-dim);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Questões */
+        .question {
+            background: var(--mars-card);
+            border: 1px solid var(--mars-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .question:focus-within {
+            border-color: var(--mars-rubi);
+        }
+
+        .question h3 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #050505;
+            border: 1px solid var(--mars-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #0f0f0f;
+            border-color: #333;
+        }
+
+        .option input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .option input[type="radio"]:checked {
+            border-color: var(--mars-rubi);
+            background-color: var(--mars-rubi);
+            box-shadow: 0 0 10px var(--mars-rubi);
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--mars-text-dim);
+            transition: color 0.3s ease;
+        }
+
+        .option input[type="radio"]:checked + label {
+            color: white;
+        }
+
+        /* Botão Principal */
+        .button-container {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .btn-calculate {
+            background: var(--mars-rubi);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--mars-glow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-calculate:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--mars-rubi);
+        }
+
+        /* Resultados */
+        .results-container {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: var(--mars-card);
+            border: 1px solid var(--mars-border);
+            border-radius: 24px;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-box {
+            background: #050505;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--mars-border);
+        }
+
+        .chart-box h4 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--mars-text-dim);
+        }
+
+        .analysis-card {
+            background: #050505;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        .profile-item {
+            margin-bottom: 25px;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bg {
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--mars-rubi);
+            width: 0%;
+            transition: width 1.5s ease;
+            box-shadow: 0 0 10px var(--mars-rubi);
+        }
+
+        /* Seção de Recomendações Detalhadas */
+        .rec-detail {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(194, 0, 0, 0.03);
+            border: 1px solid var(--mars-border);
+            border-radius: 16px;
+        }
+
+        .rec-section {
+            margin-bottom: 20px;
+        }
+
+        .rec-section h5 {
+            color: var(--mars-rubi);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rec-section p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--mars-text-dim);
+        }
+
+        .rec-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .rec-section li {
+            font-size: 0.85rem;
+            color: var(--mars-text-dim);
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .rec-section li::before {
+            content: "•";
+            color: var(--mars-rubi);
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-bottom: 40px;
+            font-size: 0.7rem;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>PERFIL<span>.</span>COGNITIVO</h1>
+            <p class="subtitle">Descubra como seu cérebro aprende inglês</p>
+        </header>
+
+        <form id="quizForm">
+            <div class="question">
+                <h3>1. Ao iniciar um novo tópico, você prefere:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" value="A" id="q1a">
+                        <label for="q1a">Entender a regra geral e a estrutura primeiro.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="B" id="q1b">
+                        <label for="q1b">Ver exemplos práticos e deduzir a regra.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="C" id="q1c">
+                        <label for="q1c">Mergulhar na prática sem entender tudo.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>2. Ao aprender novas palavras, lembra-se melhor:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" value="A" id="q2a">
+                        <label for="q2a">Da imagem, cores ou posição no papel.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="B" id="q2b">
+                        <label for="q2b">Da sonoridade e entonação.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="C" id="q2c">
+                        <label for="q2c">Da sensação física de escrever ou encenar.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>3. Ao ouvir uma frase em inglês, você:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" value="A" id="q3a">
+                        <label for="q3a">Repete mentalmente cada palavra antes de entender.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="B" id="q3b">
+                        <label for="q3b">Repete em voz alta facilmente sem entender tudo.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="C" id="q3c">
+                        <label for="q3c">Precisa ver a frase escrita para processar.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>4. Numa conversa, se esquece uma palavra:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" value="A" id="q4a">
+                        <label for="q4a">Trava e fica em silêncio até lembrar o termo exato.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="B" id="q4b">
+                        <label for="q4b">Tenta explicar de outro jeito, mesmo errando.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="C" id="q4c">
+                        <label for="q4c">Desiste da frase e muda de assunto.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>5. Como se sente ao cometer erros em público?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" value="A" id="q5a">
+                        <label for="q5a">Muito desconfortável. Falo pouco, mas certo.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="B" id="q5b">
+                        <label for="q5b">Normal. Errar faz parte do processo.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="C" id="q5c">
+                        <label for="q5c">Tranquilo com amigos, mas travo no formal.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>6. Ao escrever um texto em inglês, você:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" value="A" id="q6a">
+                        <label for="q6a">Revisa cada frase várias vezes antes de seguir.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="B" id="q6b">
+                        <label for="q6b">Escreve tudo de uma vez e revisa no final.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="C" id="q6c">
+                        <label for="q6c">Escreve aos poucos, sem medo de errar.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>7. Como organiza seus estudos hoje?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" value="A" id="q7a">
+                        <label for="q7a">Materiais estruturados e horários rígidos.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="B" id="q7b">
+                        <label for="q7b">De forma livre: séries, músicas e vídeos.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" value="C" id="q7c">
+                        <label for="q7c">Quando dá vontade ou por necessidade específica.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>8. Ao descrever uma cena em inglês:</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" value="A" id="q8a">
+                        <label for="q8a">Descreve objetos em ordem lógica e específica.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="B" id="q8b">
+                        <label for="q8b">Fala o que vê sem ordem clara, com detalhes.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" value="C" id="q8c">
+                        <label for="q8c">Usa palavras genéricas e evita detalhes complexos.</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="button-container">
+            <button class="btn-calculate" onclick="calcularResultados()">Ver Meu Mapa Cognitivo</button>
+        </div>
+
+        <!-- Resultados -->
+        <div class="results-container" id="results">
+            <h2>Resultados do seu Mapa</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-box">
+                    <h4>Distribuição de Estilos</h4>
+                    <canvas id="perfilChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h4>Radar de Processamento</h4>
+                    <canvas id="processamentoChart"></canvas>
+                </div>
+            </div>
+
+            <div class="analysis-card">
+                <div class="profile-item">
+                    <div class="profile-header">
+                        <span>Perfil Analítico / Monitorado</span>
+                        <span id="txtA">0%</span>
+                    </div>
+                    <div class="progress-bg"><div id="barA" class="progress-fill"></div></div>
+                </div>
+                <div class="profile-item">
+                    <div class="profile-header">
+                        <span>Perfil Global / Intuitivo</span>
+                        <span id="txtB">0%</span>
+                    </div>
+                    <div class="progress-bg"><div id="barB" class="progress-fill"></div></div>
+                </div>
+                <div class="profile-item">
+                    <div class="profile-header">
+                        <span>Perfil Cinestésico / Prático</span>
+                        <span id="txtC">0%</span>
+                    </div>
+                    <div class="progress-bg"><div id="barC" class="progress-fill"></div></div>
+                </div>
+
+                <div class="rec-detail" id="detalhesRec">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Education of the Future<br>
+            Neuro-based Methodology
+        </footer>
+    </div>
+
+    <script>
+        let perfilChart, processamentoChart;
+
+        const dataRecomendacoes = {
+            A: {
+                title: "O Analítico Estruturado",
+                estudar: "Você aprende melhor quando entende o 'porquê'. Use mapas mentais, tabelas comparativas e foque na lógica das frases. Estudar a gramática como uma ferramenta de construção é essencial para você.",
+                evitar: "Tentar 'apenas falar' sem base técnica pode te frustrar. Evite métodos puramente imersivos sem explicações claras.",
+                ferramentas: ["Anki (Flashcards)", "Gramática de Uso", "Mapas Mentais", "Shadowing focado em precisão"]
+            },
+            B: {
+                title: "O Global Intuitivo",
+                estudar: "Seu cérebro absorve inglês por contexto. Mergulhe em podcasts, séries sem legenda e tente 'sentir' o idioma. Deixe a gramática para o final, apenas para polir o que você já usa.",
+                evitar: "Listas de verbos isoladas e exercícios repetitivos de preencher lacunas drenam sua energia. Evite decorar regras antes de ver a aplicação real.",
+                ferramentas: ["Netflix/Disney+ (Legendas em Inglês)", "Podcasts Nativos", "Leitura por Contexto", "Conversação Livre"]
+            },
+            C: {
+                title: "O Cinestésico Prático",
+                estudar: "Você precisa colocar a mão na massa. Escreva fisicamente (papel e caneta), use post-its pela casa e tente associar palavras a gestos ou emoções. O movimento ajuda sua memória.",
+                evitar: "Ficar horas sentado lendo textos longos e estáticos. A falta de estímulo físico faz sua mente dispersar rapidamente.",
+                ferramentas: ["Roleplay (Encenação)", "Escrita à mão", "Post-its", "Apps de repetição ativa"]
+            },
+            M: {
+                title: "O Perfil Misto Dinâmico",
+                estudar: "Você tem a vantagem da versatilidade. Alterne seus dias entre estudo pesado de gramática (Analítico) e dias de pura diversão com filmes (Global). Essa variedade mantém seu cérebro engajado.",
+                evitar: "A monotonia. Estudar da mesma forma todos os dias fará você estagnar. Mude o ambiente e a ferramenta frequentemente.",
+                ferramentas: ["Cronograma Híbrido", "Plataformas de Interação", "Mistura de Áudio e Texto"]
+            }
+        };
+
+        function calcularResultados() {
+            const respostas = [];
+            for (let i = 1; i <= 8; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!selected) {
+                    selected?.parentElement.parentElement.parentElement.scrollIntoView({ behavior: 'smooth' });
+                    return alert(`Por favor, responda à pergunta ${i}`);
+                }
+                respostas.push(selected.value);
+            }
+
+            let countA = 0, countB = 0, countC = 0;
+            respostas.forEach(r => {
+                if (r === 'A') countA++;
+                else if (r === 'B') countB++;
+                else if (r === 'C') countC++;
+            });
+
+            const total = 8;
+            const pctA = (countA / total) * 100;
+            const pctB = (countB / total) * 100;
+            const pctC = (countC / total) * 100;
+
+            document.getElementById('barA').style.width = pctA + '%';
+            document.getElementById('barB').style.width = pctB + '%';
+            document.getElementById('barC').style.width = pctC + '%';
+            document.getElementById('txtA').innerText = Math.round(pctA) + '%';
+            document.getElementById('txtB').innerText = Math.round(pctB) + '%';
+            document.getElementById('txtC').innerText = Math.round(pctC) + '%';
+
+            // Definir perfil predominante
+            let perfilKey = 'M';
+            if (pctA > pctB && pctA > pctC) perfilKey = 'A';
+            else if (pctB > pctA && pctB > pctC) perfilKey = 'B';
+            else if (pctC > pctA && pctC > pctB) perfilKey = 'C';
+
+            const rec = dataRecomendacoes[perfilKey];
+            
+            let htmlRec = `
+                <div class="rec-section">
+                    <h5>✨ Perfil Predominante: ${rec.title}</h5>
+                </div>
+                <div class="rec-section">
+                    <h5>🚀 Como Estudar</h5>
+                    <p>${rec.estudar}</p>
+                </div>
+                <div class="rec-section">
+                    <h5>⚠️ O que Evitar</h5>
+                    <p>${rec.evitar}</p>
+                </div>
+                <div class="rec-section">
+                    <h5>🛠️ Ferramentas Ideais</h5>
+                    <ul>
+                        ${rec.ferramentas.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            document.getElementById('detalhesRec').innerHTML = htmlRec;
+
+            renderCharts(pctA, pctB, pctC, respostas);
+            document.getElementById('results').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('results').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        function renderCharts(a, b, c, resp) {
+            if (perfilChart) perfilChart.destroy();
+            if (processamentoChart) processamentoChart.destroy();
+
+            const ctx1 = document.getElementById('perfilChart').getContext('2d');
+            perfilChart = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Analítico', 'Global', 'Cinestésico'],
+                    datasets: [{
+                        data: [a, b, c],
+                        backgroundColor: ['#c20000', '#666', '#222'],
+                        borderColor: '#0a0a0a',
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { color: '#a0a0a0', font: { family: 'Poppins' } } }
+                    }
+                }
+            });
+
+            const ctx2 = document.getElementById('processamentoChart').getContext('2d');
+            processamentoChart = new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['Lógica', 'Visual', 'Auditivo', 'Erro', 'Ordem', 'Detalhe'],
+                    datasets: [{
+                        label: 'Seu Processamento',
+                        data: [
+                            resp[0] === 'A' ? 95 : 40,
+                            resp[1] === 'A' ? 95 : 40,
+                            resp[2] === 'B' ? 95 : 40,
+                            resp[4] === 'B' ? 95 : 40,
+                            resp[6] === 'A' ? 95 : 40,
+                            resp[7] === 'B' ? 95 : 40
+                        ],
+                        backgroundColor: 'rgba(194, 0, 0, 0.2)',
+                        borderColor: '#c20000',
+                        pointBackgroundColor: '#c20000'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#333' },
+                            grid: { color: '#333' },
+                            pointLabels: { color: '#a0a0a0' },
+                            ticks: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
