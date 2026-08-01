@@ -19,6 +19,65 @@
             --mars-glow: rgba(194, 0, 0, 0.3);
         }
 
+        /* ── SCROLLBAR ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0c0c0c;
+    border-radius: 10px;
+    border: 1px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #c20000, #8b0000);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #e00000, #c20000);
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(135deg, #ff1a1a, #e00000);
+}
+
+::-webkit-scrollbar-corner {
+    background: #0c0c0c;
+    border: 1px solid #1a1a1a;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c20000 #0c0c0c;
+}
+
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+    
+    * {
+        scrollbar-width: none;
+    }
+    
+    body {
+        overflow-y: scroll;
+    }
+}
         * {
             margin: 0;
             padding: 0;
@@ -308,7 +367,7 @@
     <div class="container">
         <header>
             <h1>PERFIL<span>.</span>COGNITIVO</h1>
-            <p class="subtitle">Descubra como seu cérebro aprende inglês</p>
+            <p class="subtitle">Entenda como seu cérebro aprende</p>
         </header>
 
         <form id="quizForm">
@@ -507,7 +566,7 @@
 
         <footer>
             Education of the Future<br>
-            Neuro-based Methodology
+            A precisão deste teste é limitada e serve apenas de referência. Para entender seu perfil com precisão agende um teste com um profissional qualificado.
         </footer>
     </div>
 
@@ -581,18 +640,18 @@
             
             let htmlRec = `
                 <div class="rec-section">
-                    <h5>✨ Perfil Predominante: ${rec.title}</h5>
+                    <h5>Perfil Predominante: ${rec.title}</h5>
                 </div>
                 <div class="rec-section">
-                    <h5>🚀 Como Estudar</h5>
+                    <h5>Como Estudar</h5>
                     <p>${rec.estudar}</p>
                 </div>
                 <div class="rec-section">
-                    <h5>⚠️ O que Evitar</h5>
+                    <h5>O que Evitar</h5>
                     <p>${rec.evitar}</p>
                 </div>
                 <div class="rec-section">
-                    <h5>🛠️ Ferramentas Ideais</h5>
+                    <h5>Ferramentas Ideais</h5>
                     <ul>
                         ${rec.ferramentas.map(f => `<li>${f}</li>`).join('')}
                     </ul>
