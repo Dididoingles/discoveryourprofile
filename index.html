@@ -2,724 +2,1615 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" type="image/png" href="favicon.png">
-    <title>Teste de Perfil de Aprendizagem | @dicarvalho.prof</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Metatags de Compartilhamento -->
+    <meta property="og:title" content="Language Lab">
+    <meta property="og:description" content="Um laboratório, dezenas de maneiras de aprender.">
+    <meta property="og:image" content="https://dididoingles.github.io/lab/assets/metalab.png">
+    <meta property="og:url" content="https://dididoingles.github.io/lab/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Language Lab">
+    <meta name="twitter:description" content="Um laboratório, dezenas de maneiras de aprender.">
+    <meta name="twitter:image" content="https://dididoingles.github.io/lab/assets/metalab.png">
+
+    <title>Perfil do estudante | Mars Education</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
         :root {
-            --mars-rubi: #c20000;
-            --mars-bg: #000000;
-            --mars-card: #0a0a0a;
-            --mars-border: #1a1a1a;
-            --mars-text: #ffffff;
-            --mars-text-dim: #a0a0a0;
-            --mars-glow: rgba(194, 0, 0, 0.3);
+            --ink: #222222;
+            --paper: #fff6f2;
+            --paper-warm: #ffeeee;
+            --accent: #c20000;
+            --accent-dark: #a30000;
+            --muted: #6b5252;
+            --muted-light: #8a6f6f;
+            --border: rgba(34,34,34,0.10);
+            --border-strong: rgba(34,34,34,0.18);
+            --shadow-hard-sm: 2px 3px 0 rgba(34,34,34,.85);
+            --shadow-hard: 4px 6px 0 rgba(34,34,34,.85);
+            --font-title: 'Poppins', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --font-hand: 'Gochi Hand', cursive;
+            --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* ── SCROLLBAR ────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0c0c0c;
-    border-radius: 10px;
-    border: 1px solid #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #c20000, #8b0000);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #e00000, #c20000);
-    cursor: pointer;
-}
-
-::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(135deg, #ff1a1a, #e00000);
-}
-
-::-webkit-scrollbar-corner {
-    background: #0c0c0c;
-    border: 1px solid #1a1a1a;
-}
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: #c20000 #0c0c0c;
-}
-
-@media (max-width: 768px) {
-    ::-webkit-scrollbar {
-        width: 0;
-        background: transparent;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: transparent;
-    }
-    
-    * {
-        scrollbar-width: none;
-    }
-    
-    body {
-        overflow-y: scroll;
-    }
-}
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
 
         body {
-            background-color: var(--mars-bg);
-            color: var(--mars-text);
-            padding: 20px 10px;
+            font-family: var(--font-title);
+            color: var(--ink);
+            background-color: var(--paper);
+            background-image:
+                radial-gradient(ellipse 60% 80% at 0% 50%,  rgba(194,0,0,0.06) 0%, rgba(194,0,0,0) 60%),
+                radial-gradient(ellipse 60% 80% at 100% 50%, rgba(194,0,0,0.06) 0%, rgba(194,0,0,0) 60%),
+                radial-gradient(ellipse 50% 60% at 50% 0%,   rgba(194,0,0,0.03) 0%, rgba(194,0,0,0) 70%);
+            background-attachment: fixed;
+            overflow: hidden;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(34, 34, 34, 0); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        p, .text { text-wrap: pretty; overflow-wrap: break-word; hyphens: auto; }
+
+        .stage {
+            position: relative;
+            width: 100%;
+            max-width: 1180px;
+            height: min(94dvh, 820px);
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
+        /* ===== INTRO: divisão mais equilibrada ===== */
+        .page {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 40px;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.55s var(--ease-out-expo),
+                        transform 0.55s var(--ease-out-expo),
+                        visibility 0s linear 0.55s;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
+        .page.is-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            transition: opacity 0.55s var(--ease-out-expo),
+                        transform 0.55s var(--ease-out-expo),
+                        visibility 0s linear 0s;
         }
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
+        .page--test { align-items: stretch; }
 
-        h1 span {
-            color: var(--mars-rubi);
-        }
-
-        .subtitle {
-            color: var(--mars-text-dim);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Questões */
-        .question {
-            background: var(--mars-card);
-            border: 1px solid var(--mars-border);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s ease;
-        }
-
-        .question:focus-within {
-            border-color: var(--mars-rubi);
-        }
-
-        .question h3 {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .options {
+        .col-left {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+            gap: 22px;
         }
 
-        .option {
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 22px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 4.2vw, 3.4rem);
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            text-wrap: balance;
+        }
+        .hero-title .accent { color: var(--accent); }
+
+        .hero-sub {
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+            margin-top: 12px;
+            line-height: 1.55;
+            max-width: 52ch;   /* era 38ch — agora ocupa melhor a coluna */
+        }
+
+        .video-stage {
+            width: 100%;
+            max-width: 460px;
+            aspect-ratio: 16 / 10;
             position: relative;
+            isolation: isolate;
+            padding: 8px;
+            margin: -8px;
+        }
+
+        .video-stage video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            pointer-events: none;
+            background: transparent;
+            -webkit-mask-image:
+                radial-gradient(ellipse 95% 95% at 50% 50%, #000 55%, transparent 100%),
+                linear-gradient(to right,  transparent 0%, #000 12%, #000 88%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-image:
+                radial-gradient(ellipse 95% 95% at 50% 50%, #000 55%, transparent 100%),
+                linear-gradient(to right,  transparent 0%, #000 12%, #000 88%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+            mask-composite: intersect;
+            mix-blend-mode: multiply;
+        }
+
+        .col-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            gap: 22px;
+        }
+
+        .desc-lead {
+            font-family: var(--font-title);
+            font-size: clamp(1rem, 1.3vw, 1.14rem);
+            line-height: 1.7;
+            color: var(--ink);
+            font-weight: 400;
+            max-width: 52ch;   /* era 46ch */
+        }
+        .desc-lead strong { color: var(--accent); font-weight: 600; }
+
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .meta-chip {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--muted);
+            border: 1.5px solid var(--border-strong);
+            padding: 5px 11px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            background: rgba(255,255,255,0.5);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+        }
+        .meta-chip i { color: var(--accent); font-size: 0.7rem; }
+
+        .btn-instagram {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.5);
+            border: 1.5px solid var(--border-strong);
+            color: var(--muted);
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all .25s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-instagram:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(194, 0, 0, 0.06);
+        }
+        .btn-instagram i { color: var(--accent); font-size: .85rem; }
+
+        .start-btn {
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--ink);
+            padding: 12px 30px;
+            border-radius: 11px;
+            cursor: pointer;
+            font-family: var(--font-title);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all .2s var(--ease-out-expo);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            box-shadow: var(--shadow-hard-sm);
+            align-self: flex-start;
+        }
+        .start-btn:hover {
+            background: var(--accent-dark);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 5px 0 rgba(34,34,34,.85);
+        }
+        .start-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 rgba(34,34,34,.85);
+        }
+        .start-btn i { font-size: 0.75rem; }
+
+        .test-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .game-header {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
-            background: #050505;
-            border: 1px solid var(--mars-border);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .option:hover {
-            background: #0f0f0f;
-            border-color: #333;
-        }
-
-        .option input[type="radio"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #333;
-            border-radius: 50%;
-            margin-right: 15px;
-            transition: all 0.3s ease;
+            justify-content: space-between;
+            gap: 14px;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            margin-top: 50px;
+            border-bottom: 1.5px dashed var(--border);
             flex-shrink: 0;
         }
 
-        .option input[type="radio"]:checked {
-            border-color: var(--mars-rubi);
-            background-color: var(--mars-rubi);
-            box-shadow: 0 0 10px var(--mars-rubi);
-        }
-
-        .option label {
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: var(--mars-text-dim);
-            transition: color 0.3s ease;
-        }
-
-        .option input[type="radio"]:checked + label {
-            color: white;
-        }
-
-        /* Botão Principal */
-        .button-container {
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .btn-calculate {
-            background: var(--mars-rubi);
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px var(--mars-glow);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-calculate:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px var(--mars-rubi);
-        }
-
-        /* Resultados */
-        .results-container {
-            display: none;
-            margin-top: 40px;
-            padding: 30px;
-            background: var(--mars-card);
-            border: 1px solid var(--mars-border);
-            border-radius: 24px;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .results-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.5rem;
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .chart-box {
-            background: #050505;
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--mars-border);
-        }
-
-        .chart-box h4 {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--mars-text-dim);
-        }
-
-        .analysis-card {
-            background: #050505;
-            padding: 20px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-
-        .profile-item {
-            margin-bottom: 25px;
-        }
-
-        .profile-header {
+        .game-header .brand {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+            align-items: baseline;
+            gap: 8px;
+            min-width: 0;
         }
-
-        .progress-bg {
-            height: 8px;
-            background: #1a1a1a;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--mars-rubi);
-            width: 0%;
-            transition: width 1.5s ease;
-            box-shadow: 0 0 10px var(--mars-rubi);
-        }
-
-        /* Seção de Recomendações Detalhadas */
-        .rec-detail {
-            margin-top: 30px;
-            padding: 25px;
-            background: rgba(194, 0, 0, 0.03);
-            border: 1px solid var(--mars-border);
-            border-radius: 16px;
-        }
-
-        .rec-section {
-            margin-bottom: 20px;
-        }
-
-        .rec-section h5 {
-            color: var(--mars-rubi);
+        .game-header .brand .l {
+            font-family: var(--font-title);
+            font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 8px;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+        .game-header .brand .s {
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+
+        .progress-wrap {
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1;
+            max-width: 240px;
+        }
+        .progress-track {
+            flex: 1;
+            height: 5px;
+            background: rgba(34,34,34,.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.55s var(--ease-out-expo);
+        }
+        .progress-count {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--muted);
+            white-space: nowrap;
+            min-width: 48px;
+            text-align: right;
         }
 
-        .rec-section p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--mars-text-dim);
+        .question-area {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding-right: 18px;
+            transition: opacity 0.2s ease;
         }
 
-        .rec-section ul {
-            list-style: none;
-            padding-left: 0;
+        .level-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(194,0,0,0.06);
+            border: 1px solid rgba(194,0,0,0.18);
+            padding: 3px 9px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+            align-self: flex-start;
         }
 
-        .rec-section li {
+        .question-text {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            line-height: 1.55;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 18px;
+            min-height: 48px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: rgba(255,255,255,0.6);
+            border: 1.5px solid var(--border-strong);
+            color: var(--ink);
+            padding: 11px 15px;
+            border-radius: 11px;
+            text-align: left;
+            cursor: pointer;
+            transition: all .2s var(--ease-out-expo);
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .option-btn .opt-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--muted);
+            margin-right: 11px;
+            flex-shrink: 0;
+            border-radius: 6px;
+            border: 1.5px solid var(--border-strong);
+            font-size: 0.7rem;
+            transition: all .2s;
+        }
+        .option-btn .opt-text { flex: 1; }
+
+        .option-btn:hover:not(.selected):not(:disabled) {
+            border-color: var(--ink);
+            transform: translateX(4px);
+            box-shadow: -3px 0 0 var(--accent);
+        }
+        .option-btn.selected {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+            box-shadow: var(--shadow-hard-sm);
+            transform: translate(-1px, -1px);
+        }
+        .option-btn.selected .opt-letter {
+            color: #fff;
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.12);
+        }
+        .option-btn:disabled { cursor: default; opacity: 0.65; }
+        .option-btn.selected:disabled { opacity: 1; }
+
+        .game-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 14px;
+            margin-top: 14px;
+            border-top: 1.5px dashed var(--border);
+            flex-shrink: 0;
+        }
+
+        .btn-nav {
+            background: rgba(255,255,255,0.5);
+            border: 1.5px solid var(--border-strong);
+            color: var(--muted);
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            padding: 8px 14px;
+            border-radius: 9px;
+            transition: all .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: lowercase;
+        }
+        .btn-nav:hover:not(:disabled) {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(194,0,0,0.06);
+        }
+        .btn-nav:disabled { opacity: 0.32; cursor: not-allowed; }
+        .btn-nav.primary {
+            background: var(--ink);
+            color: #fff;
+            border-color: var(--ink);
+        }
+        .btn-nav.primary:hover:not(:disabled) {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        /* ============================================================
+           RESULTADO — scrollbar colada na borda direita do card
+           ============================================================ */
+        .result-view {
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0;          /* zero: a scrollbar fica na borda */
+            margin: 0;
+            /* sem scrollbar-gutter: ele reservava espaço interno */
+        }
+        .result-view.is-active {
+            display: flex;
+            animation: fadeIn 0.5s var(--ease-out-expo) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Conteúdo interno: padding só à esquerda/baixo; o direito
+           é controlado para dar respiro sem mover a scrollbar */
+        .result-inner {
+            padding: 4px 18px 28px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .res-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+        }
+        .profile-badge {
+            font-family: var(--font-title);
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin: 4px 0 8px;
+            text-shadow: 3px 3px 0 rgba(194,0,0,.12);
+            animation: fadeIn 0.6s var(--ease-out-expo) 0.1s both;
+        }
+
+        .res-desc {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.65;
+            max-width: 60ch;
+            margin-bottom: 16px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 700px) {
+            .result-grid { grid-template-columns: 1fr; }
+        }
+
+        .chart-box {
+            background: rgba(255,255,255,0.45);
+            border: 1.5px solid var(--border-strong);
+            border-radius: 12px;
+            padding: 12px 12px 8px;
+            min-height: 0;
+        }
+        .chart-box h4 {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        .chart-box canvas {
+            width: 100% !important;
+            height: 150px !important;
+            max-height: 150px;
+        }
+
+        .rec-box {
+            background: rgba(255,255,255,0.45);
+            border: 1.5px solid var(--border-strong);
+            border-radius: 12px;
+            padding: 14px 16px;
+            width: 100%;
+            margin-bottom: 14px;
+        }
+        .rec-box h4 {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .rec-box h4 i { font-size: 0.8rem; }
+        .rec-box p {
             font-size: 0.85rem;
-            color: var(--mars-text-dim);
-            margin-bottom: 5px;
-            padding-left: 15px;
-            position: relative;
+            line-height: 1.6;
+            color: var(--ink);
+            margin-bottom: 8px;
         }
-
-        .rec-section li::before {
-            content: "•";
-            color: var(--mars-rubi);
+        .rec-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .rec-box li {
+            font-size: 0.82rem;
+            color: var(--ink);
+            margin-bottom: 5px;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.45;
+        }
+        .rec-box li::before {
+            content: "→";
+            color: var(--accent);
             position: absolute;
             left: 0;
+            font-weight: 600;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-bottom: 40px;
-            font-size: 0.7rem;
-            color: #333;
-            letter-spacing: 2px;
+        .result-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+            flex-shrink: 0;
         }
 
-        @media (min-width: 768px) {
-            .charts-grid {
-                grid-template-columns: 1fr 1fr;
+        .restart-btn,
+        .pdf-btn {
+            border: 2px solid var(--ink);
+            padding: 9px 22px;
+            border-radius: 11px;
+            cursor: pointer;
+            font-family: var(--font-title);
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: all .2s var(--ease-out-expo);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            box-shadow: var(--shadow-hard-sm);
+        }
+        .restart-btn {
+            background: var(--accent);
+            color: #fff;
+        }
+        .restart-btn:hover {
+            background: var(--accent-dark);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 5px 0 rgba(34,34,34,.85);
+        }
+        .restart-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 rgba(34,34,34,.85);
+        }
+        .pdf-btn {
+            background: #fff;
+            color: var(--ink);
+        }
+        .pdf-btn:hover {
+            background: var(--paper-warm);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 5px 0 rgba(34,34,34,.85);
+        }
+        .pdf-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 rgba(34,34,34,.85);
+        }
+        .pdf-btn:disabled {
+            opacity: 0.5;
+            cursor: wait;
+            transform: none;
+            box-shadow: var(--shadow-hard-sm);
+        }
+
+        .mars-link {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            width: 64px;
+            height: 64px;
+            z-index: 50;
+            display: block;
+            text-decoration: none;
+            animation: marsSlideIn 0.9s var(--ease-out-expo) 0.35s both;
+            isolation: isolate;
+            cursor: pointer;
+            transition: transform .3s;
+        }
+        .mars-link::before {
+            content: '';
+            position: absolute;
+            inset: -18%;
+            border-radius: 50%;
+            background: radial-gradient(circle at center,
+                rgba(194, 0, 0, 0.55) 0%,
+                rgba(194, 0, 0, 0.28) 45%,
+                rgba(194, 0, 0, 0) 72%);
+            filter: blur(8px);
+            z-index: -1;
+            pointer-events: none;
+            animation: marsGlowPulse 3.2s ease-in-out infinite;
+        }
+        .mars-link:hover { transform: scale(1.1) rotate(5deg); }
+        .mars-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: marsFloat 3.4s ease-in-out infinite;
+            will-change: transform;
+            filter: drop-shadow(0 6px 14px rgba(194, 0, 0, 0.25));
+        }
+
+        .mars-tooltip {
+            position: fixed;
+            top: 28px;
+            right: 98px;
+            background: var(--paper);
+            border: 2px solid var(--ink);
+            border-radius: 12px;
+            padding: 10px 14px;
+            width: 220px;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            line-height: 1.5;
+            color: var(--ink);
+            box-shadow: var(--shadow-hard-sm);
+            z-index: 49;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(16px);
+            transition: all .3s var(--ease-out-expo);
+            pointer-events: none;
+        }
+        .mars-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -10px; top: 22px;
+            border-left: 10px solid var(--ink);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        .mars-tooltip::before {
+            content: '';
+            position: absolute;
+            right: -8px; top: 23px;
+            border-left: 9px solid var(--paper);
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            z-index: 1;
+        }
+        .mars-link:hover + .mars-tooltip,
+        .mars-tooltip.show { opacity: 1; visibility: visible; transform: translateX(0); }
+        .mars-tooltip strong { color: var(--accent); }
+
+        @keyframes marsSlideIn {
+            0%   { opacity: 0; transform: translate(60px, -30px) scale(0.6) rotate(15deg); }
+            60%  { opacity: 1; transform: translate(-4px, 2px) scale(1.06) rotate(-3deg); }
+            100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+        }
+        @keyframes marsFloat {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+        @keyframes marsGlowPulse {
+            0%, 100% { opacity: .35; transform: scale(1); }
+            50%      { opacity: .65; transform: scale(1.15); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .mars-link, .mars-link::before, .mars-link img { animation: none !important; }
+        }
+
+        @media (max-width: 900px) {
+            body { padding: 16px; padding-top: 80px; align-items: flex-start; overflow-y: auto; }
+            .game-header{ margin-top: 0px; }
+            .stage {
+                height: auto;
+                min-height: calc(100dvh - 96px);
+                align-items: stretch;
             }
-            h1 { font-size: 2.2rem; }
+            .page {
+                position: relative;
+                inset: auto;
+                grid-template-columns: 1fr;
+                gap: 28px;
+                align-items: stretch;
+                min-height: calc(100dvh - 96px);
+            }
+            .page:not(.is-active) { display: none; }
+            .page.is-active { display: grid; }
+            .video-stage { max-width: 100%; }
+            .start-btn { width: 100%; align-self: stretch; }
+            .mars-link { top: 12px; right: 12px; width: 52px; height: 52px; }
+            .mars-tooltip {
+                left: 16px; right: 16px; top: 72px;
+                width: auto; max-width: none;
+                transform: translateY(-8px);
+            }
+            .mars-tooltip.show { transform: translateY(0); }
+            .mars-tooltip::after, .mars-tooltip::before { display: none; }
+            .result-inner { padding: 4px 14px 24px 4px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.9rem; }
+            .hero-sub { font-size: 0.8rem; }
+            .game-header { flex-wrap: wrap; }
+            .progress-wrap { max-width: none; flex-basis: 100%; }
+            .question-text { font-size: 1rem; }
+            .option-btn { padding: 10px 13px; font-size: 0.88rem; }
+            .btn-nav { font-size: 0.7rem; padding: 7px 11px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media print {
+            body {
+                overflow: visible;
+                height: auto;
+                padding: 0;
+                background: white;
+                display: block;
+                font-size: 10px;
+            }
+            .stage {
+                height: auto;
+                max-width: 100%;
+                display: block;
+            }
+            .page {
+                position: relative;
+                inset: auto;
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                gap: 0;
+            }
+            .page--intro { display: none !important; }
+            .game-header, .game-footer, .question-area { display: none !important; }
+            .mars-link, .mars-tooltip, .restart-btn, .pdf-btn { display: none !important; }
+            .result-view {
+                overflow: visible;
+                height: auto;
+                padding: 0;
+                margin: 0;
+                display: block !important;
+                animation: none !important;
+            }
+            .result-inner { padding: 0; }
+            .profile-badge { text-shadow: none; }
+            .chart-box canvas { height: 120px !important; max-height: 120px !important; }
+            .chart-box, .rec-box { break-inside: avoid; }
+            .result-grid { gap: 10px; }
+            .rec-box { padding: 10px 12px; margin-bottom: 10px; }
+            .result-actions { display: none !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>PERFIL<span>.</span>COGNITIVO</h1>
-            <p class="subtitle">Entenda como seu cérebro aprende</p>
-        </header>
-
-        <form id="quizForm">
-            <div class="question">
-                <h3>1. Ao iniciar um novo tópico, você prefere:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q1" value="A" id="q1a">
-                        <label for="q1a">Entender a regra geral e a estrutura primeiro.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="B" id="q1b">
-                        <label for="q1b">Ver exemplos práticos e deduzir a regra.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="C" id="q1c">
-                        <label for="q1c">Mergulhar na prática sem entender tudo.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>2. Ao aprender novas palavras, lembra-se melhor:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q2" value="A" id="q2a">
-                        <label for="q2a">Da imagem, cores ou posição no papel.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="B" id="q2b">
-                        <label for="q2b">Da sonoridade e entonação.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="C" id="q2c">
-                        <label for="q2c">Da sensação física de escrever ou encenar.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>3. Ao ouvir uma frase em inglês, você:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q3" value="A" id="q3a">
-                        <label for="q3a">Repete mentalmente cada palavra antes de entender.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="B" id="q3b">
-                        <label for="q3b">Repete em voz alta facilmente sem entender tudo.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="C" id="q3c">
-                        <label for="q3c">Precisa ver a frase escrita para processar.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>4. Numa conversa, se esquece uma palavra:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q4" value="A" id="q4a">
-                        <label for="q4a">Trava e fica em silêncio até lembrar o termo exato.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="B" id="q4b">
-                        <label for="q4b">Tenta explicar de outro jeito, mesmo errando.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="C" id="q4c">
-                        <label for="q4c">Desiste da frase e muda de assunto.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>5. Como se sente ao cometer erros em público?</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q5" value="A" id="q5a">
-                        <label for="q5a">Muito desconfortável. Falo pouco, mas certo.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="B" id="q5b">
-                        <label for="q5b">Normal. Errar faz parte do processo.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="C" id="q5c">
-                        <label for="q5c">Tranquilo com amigos, mas travo no formal.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>6. Ao escrever um texto em inglês, você:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q6" value="A" id="q6a">
-                        <label for="q6a">Revisa cada frase várias vezes antes de seguir.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="B" id="q6b">
-                        <label for="q6b">Escreve tudo de uma vez e revisa no final.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="C" id="q6c">
-                        <label for="q6c">Escreve aos poucos, sem medo de errar.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>7. Como organiza seus estudos hoje?</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q7" value="A" id="q7a">
-                        <label for="q7a">Materiais estruturados e horários rígidos.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="B" id="q7b">
-                        <label for="q7b">De forma livre: séries, músicas e vídeos.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="C" id="q7c">
-                        <label for="q7c">Quando dá vontade ou por necessidade específica.</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question">
-                <h3>8. Ao descrever uma cena em inglês:</h3>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q8" value="A" id="q8a">
-                        <label for="q8a">Descreve objetos em ordem lógica e específica.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="B" id="q8b">
-                        <label for="q8b">Fala o que vê sem ordem clara, com detalhes.</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="C" id="q8c">
-                        <label for="q8c">Usa palavras genéricas e evita detalhes complexos.</label>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="button-container">
-            <button class="btn-calculate" onclick="calcularResultados()">Ver Meu Mapa Cognitivo</button>
-        </div>
-
-        <!-- Resultados -->
-        <div class="results-container" id="results">
-            <h2>Resultados do seu Mapa</h2>
-            
-            <div class="charts-grid">
-                <div class="chart-box">
-                    <h4>Distribuição de Estilos</h4>
-                    <canvas id="perfilChart"></canvas>
-                </div>
-                <div class="chart-box">
-                    <h4>Radar de Processamento</h4>
-                    <canvas id="processamentoChart"></canvas>
-                </div>
-            </div>
-
-            <div class="analysis-card">
-                <div class="profile-item">
-                    <div class="profile-header">
-                        <span>Perfil Analítico / Monitorado</span>
-                        <span id="txtA">0%</span>
-                    </div>
-                    <div class="progress-bg"><div id="barA" class="progress-fill"></div></div>
-                </div>
-                <div class="profile-item">
-                    <div class="profile-header">
-                        <span>Perfil Global / Intuitivo</span>
-                        <span id="txtB">0%</span>
-                    </div>
-                    <div class="progress-bg"><div id="barB" class="progress-fill"></div></div>
-                </div>
-                <div class="profile-item">
-                    <div class="profile-header">
-                        <span>Perfil Cinestésico / Prático</span>
-                        <span id="txtC">0%</span>
-                    </div>
-                    <div class="progress-bg"><div id="barC" class="progress-fill"></div></div>
-                </div>
-
-                <div class="rec-detail" id="detalhesRec">
-                    <!-- Gerado via JS -->
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            @dicarvalho.prof<br>
-            A precisão deste teste é limitada e serve apenas de referência. Para entender seu perfil com precisão agende um teste com um profissional qualificado.
-        </footer>
+    <a href="https://dididoingles.github.io/lab/" class="mars-link" aria-label="Ir para Language Lab" id="mars-link">
+        <img src="https://dididoingles.github.io/lab/assets/mars.png" alt="Mars">
+    </a>
+    <div class="mars-tooltip" id="mars-tooltip">
+        <strong>Mars</strong> te convida: conheça o <strong>Language Lab</strong> →
     </div>
 
+    <div class="stage">
+
+        <!-- PÁGINA 1: INTRO -->
+        <div class="page page--intro is-active" id="page-intro">
+            <div class="col-left">
+                <div>
+                    <div class="eyebrow">Mars Education</div>
+                    <h1 class="hero-title">Perfil de <span class="accent">aprendizagem</span></h1>
+                    <p class="hero-sub">Descubra o que realmente funciona para o seu estudo de inglês — baseado em ciência da aprendizagem.</p>
+                </div>
+                <div class="video-stage">
+                    <video id="mars-video" autoplay muted playsinline preload="auto"
+                           disablepictureinpicture disableremoteplayback
+                           controlslist="nodownload nofullscreen noremoteplayback noplaybackrate">
+                        <source src="https://dididoingles.github.io/testyourenglish/marswarm.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="col-right">
+                <p class="desc-lead">
+                    Responda <strong>12 perguntas</strong> sobre como você estuda hoje e receba um plano de atividades com <strong>maior impacto comprovado</strong> na aprendizagem de idiomas.
+                </p>
+                <div class="meta-row">
+                    <span class="meta-chip"><i class="fa-solid fa-clock"></i>~3 min</span>
+                    <span class="meta-chip"><i class="fa-solid fa-list-check"></i> 12 questões</span>
+                    <span class="meta-chip"><i class="fa-solid fa-brain"></i> Base científica</span>
+                    <a href="https://instagram.com/dicarvalho.prof" target="_blank" rel="noopener noreferrer"
+                       class="btn-instagram" aria-label="Instagram do professor">
+                        <i class="fa-brands fa-instagram"></i> Siga-nos
+                    </a>
+                </div>
+                <button class="start-btn" onclick="startTest()">
+                    <i class="fa-solid fa-play"></i> Começar
+                </button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 2: TESTE + RESULTADO -->
+        <div class="page page--test" id="page-test">
+            <div class="test-card" style="grid-column: 1 / -1;">
+
+                <div id="game-ui" style="display:none; flex-direction:column; height:100%; min-height:0;">
+                    <div class="game-header">
+                        <div class="brand">
+                            <span class="l">Hábitos de estudo</span>
+                            <span class="s">// Mars × Lab</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-track">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <span id="progress-count" class="progress-count">1 / 12</span>
+                        </div>
+                    </div>
+
+                    <div id="question-area" class="question-area"></div>
+
+                    <div class="game-footer">
+                        <button id="prev-btn" class="btn-nav" onclick="prev()">
+                            <i class="fa-solid fa-chevron-left"></i> anterior
+                        </button>
+                        <button id="next-btn" class="btn-nav primary" onclick="next()" disabled>
+                            próximo <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="result-ui" class="result-view">
+                    <div class="result-inner">
+                        <div class="res-label">Seu perfil de hábitos</div>
+                        <div id="profile-badge" class="profile-badge">--</div>
+                        <p id="profile-desc" class="res-desc"></p>
+
+                        <div class="result-grid">
+                            <div class="chart-box">
+                                <h4>Equilíbrio de práticas</h4>
+                                <canvas id="chartBalance"></canvas>
+                            </div>
+                            <div class="chart-box">
+                                <h4>Potencial de impacto</h4>
+                                <canvas id="chartImpact"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="rec-box" id="recActivities">
+                            <h4><i class="fa-solid fa-bolt"></i> Atividades de maior impacto para você</h4>
+                            <ul id="recList"></ul>
+                        </div>
+
+                        <div class="rec-box" id="recAvoid">
+                            <h4><i class="fa-solid fa-triangle-exclamation"></i> O que evitar (e por quê)</h4>
+                            <p id="avoidText"></p>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="restart-btn" onclick="resetTest()">
+                                <i class="fa-solid fa-rotate-right"></i> Refazer
+                            </button>
+                            <button class="pdf-btn" id="btnPdf" onclick="baixarPDF()">
+                                <i class="fa-solid fa-file-pdf"></i> Baixar PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        let perfilChart, processamentoChart;
-
-        const dataRecomendacoes = {
-            A: {
-                title: "O Analítico Estruturado",
-                estudar: "Você aprende melhor quando entende o 'porquê'. Use mapas mentais, tabelas comparativas e foque na lógica das frases. Estudar a gramática como uma ferramenta de construção é essencial para você.",
-                evitar: "Tentar 'apenas falar' sem base técnica pode te frustrar. Evite métodos puramente imersivos sem explicações claras.",
-                ferramentas: ["Anki (Flashcards)", "Gramática de Uso", "Mapas Mentais", "Shadowing focado em precisão"]
-            },
-            B: {
-                title: "O Global Intuitivo",
-                estudar: "Seu cérebro absorve inglês por contexto. Mergulhe em podcasts, séries sem legenda e tente 'sentir' o idioma. Deixe a gramática para o final, apenas para polir o que você já usa.",
-                evitar: "Listas de verbos isoladas e exercícios repetitivos de preencher lacunas drenam sua energia. Evite decorar regras antes de ver a aplicação real.",
-                ferramentas: ["Netflix/Disney+ (Legendas em Inglês)", "Podcasts Nativos", "Leitura por Contexto", "Conversação Livre"]
-            },
-            C: {
-                title: "O Cinestésico Prático",
-                estudar: "Você precisa colocar a mão na massa. Escreva fisicamente (papel e caneta), use post-its pela casa e tente associar palavras a gestos ou emoções. O movimento ajuda sua memória.",
-                evitar: "Ficar horas sentado lendo textos longos e estáticos. A falta de estímulo físico faz sua mente dispersar rapidamente.",
-                ferramentas: ["Roleplay (Encenação)", "Escrita à mão", "Post-its", "Apps de repetição ativa"]
-            },
-            M: {
-                title: "O Perfil Misto Dinâmico",
-                estudar: "Você tem a vantagem da versatilidade. Alterne seus dias entre estudo pesado de gramática (Analítico) e dias de pura diversão com filmes (Global). Essa variedade mantém seu cérebro engajado.",
-                evitar: "A monotonia. Estudar da mesma forma todos os dias fará você estagnar. Mude o ambiente e a ferramenta frequentemente.",
-                ferramentas: ["Cronograma Híbrido", "Plataformas de Interação", "Mistura de Áudio e Texto"]
-            }
-        };
-
-        function calcularResultados() {
-            const respostas = [];
-            for (let i = 1; i <= 8; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (!selected) {
-                    selected?.parentElement.parentElement.parentElement.scrollIntoView({ behavior: 'smooth' });
-                    return alert(`Por favor, responda à pergunta ${i}`);
-                }
-                respostas.push(selected.value);
-            }
-
-            let countA = 0, countB = 0, countC = 0;
-            respostas.forEach(r => {
-                if (r === 'A') countA++;
-                else if (r === 'B') countB++;
-                else if (r === 'C') countC++;
+        (function () {
+            const video = document.getElementById('mars-video');
+            if (!video) return;
+            video.muted = true;
+            video.autoplay = true;
+            video.loop = false;
+            video.addEventListener('loadedmetadata', () => {
+                const p = video.play();
+                if (p && p.catch) p.catch(() => {});
             });
+            video.addEventListener('ended', () => {
+                video.pause();
+                video.currentTime = Math.max(0, video.duration - 0.05);
+            });
+            video.addEventListener('contextmenu', e => e.preventDefault());
+        })();
 
-            const total = 8;
-            const pctA = (countA / total) * 100;
-            const pctB = (countB / total) * 100;
-            const pctC = (countC / total) * 100;
+        const pageIntro = document.getElementById('page-intro');
+        const pageTest  = document.getElementById('page-test');
 
-            document.getElementById('barA').style.width = pctA + '%';
-            document.getElementById('barB').style.width = pctB + '%';
-            document.getElementById('barC').style.width = pctC + '%';
-            document.getElementById('txtA').innerText = Math.round(pctA) + '%';
-            document.getElementById('txtB').innerText = Math.round(pctB) + '%';
-            document.getElementById('txtC').innerText = Math.round(pctC) + '%';
-
-            // Definir perfil predominante
-            let perfilKey = 'M';
-            if (pctA > pctB && pctA > pctC) perfilKey = 'A';
-            else if (pctB > pctA && pctB > pctC) perfilKey = 'B';
-            else if (pctC > pctA && pctC > pctB) perfilKey = 'C';
-
-            const rec = dataRecomendacoes[perfilKey];
-            
-            let htmlRec = `
-                <div class="rec-section">
-                    <h5>Perfil Predominante: ${rec.title}</h5>
-                </div>
-                <div class="rec-section">
-                    <h5>Como Estudar</h5>
-                    <p>${rec.estudar}</p>
-                </div>
-                <div class="rec-section">
-                    <h5>O que Evitar</h5>
-                    <p>${rec.evitar}</p>
-                </div>
-                <div class="rec-section">
-                    <h5>Ferramentas Ideais</h5>
-                    <ul>
-                        ${rec.ferramentas.map(f => `<li>${f}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            document.getElementById('detalhesRec').innerHTML = htmlRec;
-
-            renderCharts(pctA, pctB, pctC, respostas);
-            document.getElementById('results').style.display = 'block';
-            window.scrollTo({ top: document.getElementById('results').offsetTop - 50, behavior: 'smooth' });
+        function showTestPage() {
+            pageIntro.classList.remove('is-active');
+            setTimeout(() => pageTest.classList.add('is-active'), 300);
+        }
+        function showIntroPage() {
+            pageTest.classList.remove('is-active');
+            setTimeout(() => pageIntro.classList.add('is-active'), 300);
         }
 
-        function renderCharts(a, b, c, resp) {
-            if (perfilChart) perfilChart.destroy();
-            if (processamentoChart) processamentoChart.destroy();
+        const questions = [
+            {
+                q: "Quando você estuda inglês, com que frequência você se testa (sem consultar) para ver se lembra?",
+                options: [
+                    "Quase nunca. Prefiro reler ou assistir.",
+                    "Às vezes, quando lembro.",
+                    "Frequentemente. Gosto de me testar.",
+                    "Sempre. Uso flashcards ou quizzes regularmente."
+                ],
+                dim: "retrieval"
+            },
+            {
+                q: "Como você organiza suas revisões ao longo do tempo?",
+                options: [
+                    "Estudo tudo de uma vez antes da prova/aula.",
+                    "Reviso só quando sinto que esqueci.",
+                    "Tento revisar em dias espaçados, mas não é constante.",
+                    "Tenho um sistema de repetição espaçada (ex.: Anki)."
+                ],
+                dim: "spacing"
+            },
+            {
+                q: "Você costuma misturar diferentes tópicos/ habilidades na mesma sessão de estudo?",
+                options: [
+                    "Não. Prefiro focar em uma coisa até dominar.",
+                    "Raramente. Fico no que é mais confortável.",
+                    "Às vezes, quando o material sugere.",
+                    "Sim. Alterno gramática, escuta, fala e leitura na mesma semana."
+                ],
+                dim: "interleaving"
+            },
+            {
+                q: "Ao aprender uma palavra nova, o que você normalmente faz?",
+                options: [
+                    "Anoto e releio a lista várias vezes.",
+                    "Associo a uma imagem mental.",
+                    "Uso em uma frase ou situação real.",
+                    "Combino imagem, som e uso em contexto."
+                ],
+                dim: "multisensory"
+            },
+            {
+                q: "Com que frequência você produz inglês (falando ou escrevendo) em vez de só consumir?",
+                options: [
+                    "Quase nunca. Meu foco é entender.",
+                    "Só quando preciso para uma tarefa.",
+                    "Algumas vezes por semana.",
+                    "Diariamente. Falo ou escrevo algo em inglês todos os dias."
+                ],
+                dim: "production"
+            },
+            {
+                q: "Como você lida com erros ao falar ou escrever?",
+                options: [
+                    "Evito errar. Prefiro não falar se não tenho certeza.",
+                    "Fico frustrado e paro por um tempo.",
+                    "Aceito, mas não sei bem o que fazer com eles.",
+                    "Vejo como pista do que estudar em seguida."
+                ],
+                dim: "error"
+            },
+            {
+                q: "Quanto do seu estudo é ativo (você pensando, resolvendo, criando) vs. passivo (assistindo, lendo)?",
+                options: [
+                    "Quase todo passivo. Vídeos, séries, leitura.",
+                    "Mais passivo que ativo.",
+                    "Equilibrado.",
+                    "Mais ativo que passivo. Gosto de resolver e criar."
+                ],
+                dim: "active"
+            },
+            {
+                q: "Você costuma explicar o que aprendeu para alguém (ou para si mesmo em voz alta)?",
+                options: [
+                    "Nunca.",
+                    "Raramente.",
+                    "Às vezes, quando estudo com alguém.",
+                    "Sim, regularmente. Ensinar me ajuda a fixar."
+                ],
+                dim: "elaboration"
+            },
+            {
+                q: "Como você escolhe o que estudar em cada sessão?",
+                options: [
+                    "Sigo o que é mais fácil ou prazeroso.",
+                    "Sigo uma lista fixa sem ajustar.",
+                    "Escolho com base no que tenho mais dificuldade.",
+                    "Reavalio prioridades a cada semana com base no meu desempenho."
+                ],
+                dim: "metacognition"
+            },
+            {
+                q: "Quando você não entende algo, o que faz?",
+                options: [
+                    "Deixo para lá e sigo em frente.",
+                    "Tento decorar a regra mesmo sem entender.",
+                    "Procuro uma explicação diferente (outro vídeo, texto, exemplo).",
+                    "Busco entender o porquê e crio meu próprio exemplo."
+                ],
+                dim: "elaboration"
+            },
+            {
+                q: "Seu estudo de inglês inclui prática de pronúncia e escuta ativa (repetir em voz alta, shadowing)?",
+                options: [
+                    "Não. Só leio e escrevo.",
+                    "Ocasionalmente.",
+                    "Sim, mas sem regularidade.",
+                    "Sim, faço shadowing ou repetição regularmente."
+                ],
+                dim: "multisensory"
+            },
+            {
+                q: "Quanto tempo você mantém uma rotina de estudo antes de mudar tudo?",
+                options: [
+                    "Mudo toda semana. Fico entediado.",
+                    "Mudo a cada poucas semanas.",
+                    "Mantenho por um mês ou mais.",
+                    "Tenho uma rotina estável há meses, ajustando só o necessário."
+                ],
+                dim: "consistency"
+            }
+        ];
 
-            const ctx1 = document.getElementById('perfilChart').getContext('2d');
-            perfilChart = new Chart(ctx1, {
-                type: 'doughnut',
+        let current = 0;
+        let answers = Array(questions.length).fill(null);
+        const letters = ['A', 'B', 'C', 'D'];
+        let isTransitioning = false;
+
+        function startTest() {
+            showTestPage();
+            setTimeout(() => {
+                document.getElementById('game-ui').style.display = 'flex';
+                document.getElementById('result-ui').classList.remove('is-active');
+                render();
+            }, 320);
+        }
+
+        function resetTest() {
+            current = 0;
+            answers = Array(questions.length).fill(null);
+            isTransitioning = false;
+            document.getElementById('progress-fill').style.width = '0%';
+            showIntroPage();
+            setTimeout(() => {
+                document.getElementById('game-ui').style.display = 'none';
+                document.getElementById('result-ui').classList.remove('is-active');
+            }, 320);
+        }
+
+        function render() {
+            if (isTransitioning) return;
+            const q = questions[current];
+            const area = document.getElementById('question-area');
+            const progress = ((current + 1) / questions.length) * 100;
+
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-count').innerText = `${current + 1} / ${questions.length}`;
+            document.getElementById('prev-btn').disabled = current === 0;
+
+            const nextBtn = document.getElementById('next-btn');
+            const isLast = current === questions.length - 1;
+            nextBtn.innerHTML = isLast
+                ? 'ver resultado <i class="fa-solid fa-check"></i>'
+                : 'próximo <i class="fa-solid fa-chevron-right"></i>';
+            nextBtn.disabled = answers[current] === null;
+
+            area.style.opacity = '0';
+            area.style.transform = 'translateY(6px)';
+
+            setTimeout(() => {
+                const isAnswered = answers[current] !== null;
+                area.innerHTML = `
+                    <span class="level-tag"><i class="fa-solid fa-brain"></i> Hábito · ${current + 1}</span>
+                    <p class="question-text">${q.q}</p>
+                    <div class="options-list">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn ${answers[current] === i ? 'selected' : ''}"
+                                    onclick="selectOption(${i})"
+                                    ${isAnswered ? 'disabled' : ''}>
+                                <span class="opt-letter">${letters[i]}</span>
+                                <span class="opt-text">${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+                area.scrollTop = 0;
+                area.style.opacity = '1';
+                area.style.transform = 'translateY(0)';
+            }, 180);
+        }
+
+        function selectOption(index) {
+            if (answers[current] !== null) return;
+            answers[current] = index;
+
+            document.querySelectorAll('.option-btn').forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === index) btn.classList.add('selected');
+            });
+            document.getElementById('next-btn').disabled = false;
+
+            if (current < questions.length - 1) {
+                setTimeout(() => {
+                    current++;
+                    render();
+                }, 420);
+            }
+        }
+
+        function next() {
+            if (answers[current] === null || isTransitioning) return;
+            if (current < questions.length - 1) {
+                isTransitioning = true;
+                current++;
+                render();
+                setTimeout(() => { isTransitioning = false; }, 300);
+            } else {
+                finish();
+            }
+        }
+
+        function prev() {
+            if (current > 0 && !isTransitioning) {
+                isTransitioning = true;
+                current--;
+                render();
+                setTimeout(() => { isTransitioning = false; }, 300);
+            }
+        }
+
+        let chartBalance, chartImpact;
+        let lastResult = null;
+
+        function finish() {
+            document.getElementById('game-ui').style.display = 'none';
+            document.getElementById('result-ui').classList.add('is-active');
+            void document.getElementById('result-ui').offsetWidth;
+
+            const scores = answers.map(a => a === null ? 0 : a);
+            const sum = (indices) => indices.reduce((acc, i) => acc + scores[i], 0);
+
+            const dimRetrieval    = (sum([0]) / 3) * 100;
+            const dimSpacing      = (sum([1]) / 3) * 100;
+            const dimInterleaving = (sum([2]) / 3) * 100;
+            const dimMultisensory = (sum([3, 10]) / 6) * 100;
+            const dimProduction   = (sum([4]) / 3) * 100;
+            const dimError        = (sum([5]) / 3) * 100;
+            const dimActive       = (sum([6]) / 3) * 100;
+            const dimElaboration  = (sum([7, 9]) / 6) * 100;
+            const dimMetacognition= (sum([8]) / 3) * 100;
+            const dimConsistency  = (sum([11]) / 3) * 100;
+
+            const overall = Math.round(
+                (dimRetrieval + dimSpacing + dimInterleaving + dimMultisensory +
+                 dimProduction + dimError + dimActive + dimElaboration +
+                 dimMetacognition + dimConsistency) / 10
+            );
+
+            let badge, desc, avoid, activities;
+
+            if (overall < 35) {
+                badge = "Explorador Passivo";
+                desc = "Seu estudo hoje é majoritariamente passivo. Você consome conteúdo, mas ainda não cria desafios que forcem o cérebro a recuperar e reconstruir o que aprendeu. A boa notícia: pequenas mudanças podem gerar ganhos enormes.";
+                avoid = "Evite sessões longas de releitura e vídeos sem pausa para se testar. A sensação de familiaridade engana o cérebro — você acha que sabe, mas não recupera. Também evite estudar tudo de uma vez (cramming): a memória precisa de espaçamento para consolidar.";
+                activities = [
+                    "Feche o material e tente lembrar 3 pontos do que acabou de estudar (prática de recuperação).",
+                    "Troque 10 minutos de vídeo por 5 minutos de autoexplicação em voz alta.",
+                    "Use flashcards simples (papel ou Anki) com 5 palavras novas por dia.",
+                    "Ao errar, anote a frase correta e tente usá-la em uma nova frase sua."
+                ];
+            } else if (overall < 60) {
+                badge = "Praticante em Transição";
+                desc = "Você já usa algumas estratégias eficazes, mas elas não são consistentes. Seu próximo salto vem de transformar práticas isoladas em rotina e aumentar a dificuldade gradualmente.";
+                avoid = "Evite estudar apenas o que é confortável. O cérebro aprende mais quando precisa fazer um esforço para recuperar a informação. Também cuidado com a ilusão de fluência: assistir a séries sem pausa ativa dá a sensação de progresso, mas não consolida vocabulário.";
+                activities = [
+                    "Estabeleça um sistema de repetição espaçada: revise o conteúdo novo após 1 dia, 1 semana e 1 mês.",
+                    "Alterne habilidades na mesma sessão (ex.: 10 min de gramática, 10 min de escuta, 10 min de fala).",
+                    "Faça shadowing (repetir em voz alta imediatamente após ouvir) 3 vezes por semana.",
+                    "Explique uma regra gramatical para si mesmo como se estivesse ensinando a alguém."
+                ];
+            } else if (overall < 80) {
+                badge = "Aprendiz Estratégico";
+                desc = "Você já incorporou a maioria das práticas de alto impacto. Seu estudo é ativo e consciente. O foco agora é refinar a consistência e aumentar a produção espontânea.";
+                avoid = "Evite a armadilha da rotina rígida demais: ajustar o que estudar com base no desempenho é essencial. Não passe semanas sem produzir inglês real (fala ou escrita) — a recuperação ativa precisa de contexto comunicativo.";
+                activities = [
+                    "Aumente a produção: grave um áudio de 1 minuto em inglês 4 vezes por semana sobre um tema do seu dia.",
+                    "Use interleaving avançado: estude dois tópicos parecidos (ex.: present perfect vs. past simple) na mesma sessão para discriminar diferenças.",
+                    "Faça revisões semanais baseadas em erros: transforme seus erros mais frequentes em flashcards.",
+                    "Ensine alguém (ou simule) uma lição inteira em inglês. O esforço de organizar a explicação consolida a memória."
+                ];
+            } else {
+                badge = "Estrategista Consistente";
+                desc = "Seu perfil é o de quem estuda com métodos baseados em evidências. Você recupera ativamente, espaça revisões e produz linguagem. O ganho marginal agora vem de desafios mais complexos e feedback especializado.";
+                avoid = "Evite a complacência: manter o mesmo nível de desafio por muito tempo reduz o crescimento. Também evite negligenciar a precisão em favor da fluência (ou vice-versa) — busque feedback externo para identificar pontos cegos.";
+                activities = [
+                    "Busque feedback qualificado (professor ou parceiro de conversação) para refinar precisão e naturalidade.",
+                    "Aumente a complexidade: leia textos autênticos e resuma oralmente em 2 minutos, integrando novas estruturas.",
+                    "Use prática de recuperação com intervalos longos (ex.: revisar conteúdo de 1 mês atrás).",
+                    "Mantenha um diário de erros e revise-o quinzenalmente para identificar padrões."
+                ];
+            }
+
+            document.getElementById('profile-badge').innerText = badge;
+            document.getElementById('profile-desc').innerText = desc;
+            document.getElementById('avoidText').innerText = avoid;
+            document.getElementById('recList').innerHTML = activities.map(a => `<li>${a}</li>`).join('');
+
+            lastResult = {
+                badge, desc, avoid, activities,
+                dims: {
+                    retrieval: dimRetrieval,
+                    spacing: dimSpacing,
+                    interleaving: dimInterleaving,
+                    multisensory: dimMultisensory,
+                    production: dimProduction,
+                    error: dimError,
+                    active: dimActive,
+                    elaboration: dimElaboration,
+                    metacognition: dimMetacognition,
+                    consistency: dimConsistency
+                },
+                overall
+            };
+
+            if (chartBalance) chartBalance.destroy();
+            if (chartImpact) chartImpact.destroy();
+
+            const ctx1 = document.getElementById('chartBalance').getContext('2d');
+            chartBalance = new Chart(ctx1, {
+                type: 'bar',
                 data: {
-                    labels: ['Analítico', 'Global', 'Cinestésico'],
+                    labels: ['Recuperação', 'Espaçamento', 'Interleaving', 'Multissensorial', 'Produção'],
                     datasets: [{
-                        data: [a, b, c],
-                        backgroundColor: ['#c20000', '#666', '#222'],
-                        borderColor: '#0a0a0a',
-                        borderWidth: 5
+                        label: 'Uso atual',
+                        data: [dimRetrieval, dimSpacing, dimInterleaving, dimMultisensory, dimProduction],
+                        backgroundColor: 'rgba(194,0,0,0.65)',
+                        borderColor: '#c20000',
+                        borderWidth: 1.5,
+                        borderRadius: 4
                     }]
                 },
                 options: {
-                    plugins: { 
-                        legend: { position: 'bottom', labels: { color: '#a0a0a0', font: { family: 'Poppins' } } }
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#6b5252', font: { family: 'Space Mono', size: 8 } },
+                            grid: { color: 'rgba(34,34,34,0.06)' }
+                        },
+                        x: {
+                            ticks: { color: '#6b5252', font: { family: 'Space Mono', size: 7 }, maxRotation: 30 },
+                            grid: { display: false }
+                        }
                     }
                 }
             });
 
-            const ctx2 = document.getElementById('processamentoChart').getContext('2d');
-            processamentoChart = new Chart(ctx2, {
+            const ctx2 = document.getElementById('chartImpact').getContext('2d');
+            chartImpact = new Chart(ctx2, {
                 type: 'radar',
                 data: {
-                    labels: ['Lógica', 'Visual', 'Auditivo', 'Erro', 'Ordem', 'Detalhe'],
+                    labels: ['Erro', 'Ativo', 'Elaboração', 'Metacognição', 'Consistência'],
                     datasets: [{
-                        label: 'Seu Processamento',
-                        data: [
-                            resp[0] === 'A' ? 95 : 40,
-                            resp[1] === 'A' ? 95 : 40,
-                            resp[2] === 'B' ? 95 : 40,
-                            resp[4] === 'B' ? 95 : 40,
-                            resp[6] === 'A' ? 95 : 40,
-                            resp[7] === 'B' ? 95 : 40
-                        ],
-                        backgroundColor: 'rgba(194, 0, 0, 0.2)',
+                        label: 'Seu perfil',
+                        data: [dimError, dimActive, dimElaboration, dimMetacognition, dimConsistency],
+                        backgroundColor: 'rgba(194,0,0,0.15)',
                         borderColor: '#c20000',
-                        pointBackgroundColor: '#c20000'
+                        borderWidth: 2,
+                        pointBackgroundColor: '#c20000',
+                        pointRadius: 2
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    plugins: { legend: { display: false } },
                     scales: {
                         r: {
-                            angleLines: { color: '#333' },
-                            grid: { color: '#333' },
-                            pointLabels: { color: '#a0a0a0' },
-                            ticks: { display: false },
-                            suggestedMin: 0,
-                            suggestedMax: 100
+                            beginAtZero: true,
+                            max: 100,
+                            angleLines: { color: 'rgba(34,34,34,0.1)' },
+                            grid: { color: 'rgba(34,34,34,0.1)' },
+                            pointLabels: { color: '#6b5252', font: { family: 'Space Mono', size: 7 } },
+                            ticks: { display: false }
                         }
-                    },
-                    plugins: { legend: { display: false } }
+                    }
                 }
             });
+
+            setTimeout(() => {
+                chartBalance.resize();
+                chartImpact.resize();
+            }, 100);
+        }
+
+        /* ============================================================
+           BAIXAR PDF — inclui título, gráficos como imagem e conteúdo
+           ============================================================ */
+        async function baixarPDF() {
+            const btn = document.getElementById('btnPdf');
+            if (!lastResult) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Gerando...';
+
+            try {
+                const { jsPDF } = window.jspdf;
+
+                const balanceCanvas = document.getElementById('chartBalance');
+                const impactCanvas  = document.getElementById('chartImpact');
+                const balanceImg = balanceCanvas.toDataURL('image/png');
+                const impactImg  = impactCanvas.toDataURL('image/png');
+
+                const resultEl = document.getElementById('result-ui');
+                const clone = resultEl.cloneNode(true);
+                clone.style.position = 'fixed';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.width = '800px';
+                clone.style.height = 'auto';
+                clone.style.maxHeight = 'none';
+                clone.style.overflow = 'visible';
+                clone.style.padding = '0';
+                clone.style.margin = '0';
+                clone.style.background = '#fff6f2';
+                clone.style.display = 'flex';
+                clone.style.border = 'none';
+                clone.style.borderRadius = '0';
+                clone.querySelectorAll('.result-actions').forEach(el => el.remove());
+
+                const cloneBalance = clone.querySelector('#chartBalance');
+                const cloneImpact  = clone.querySelector('#chartImpact');
+                if (cloneBalance) {
+                    const img = document.createElement('img');
+                    img.src = balanceImg;
+                    img.style.width = '100%';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'contain';
+                    img.style.display = 'block';
+                    cloneBalance.replaceWith(img);
+                }
+                if (cloneImpact) {
+                    const img = document.createElement('img');
+                    img.src = impactImg;
+                    img.style.width = '100%';
+                    img.style.height = '150px';
+                    img.style.objectFit = 'contain';
+                    img.style.display = 'block';
+                    cloneImpact.replaceWith(img);
+                }
+
+                const header = document.createElement('div');
+                header.style.padding = '20px 24px 10px';
+                header.style.borderBottom = '2px solid #c20000';
+                header.style.marginBottom = '16px';
+                header.innerHTML = `
+                    <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#c20000;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;">Mars Education</div>
+                    <div style="font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;color:#222;letter-spacing:-.04em;line-height:1.1;">Perfil de <span style="color:#c20000;">Aprendizagem</span></div>
+                    <div style="font-family:'Space Mono',monospace;font-size:11px;color:#6b5252;margin-top:6px;">Seu perfil de aprendizagem de inglês</div>
+                `;
+                clone.insertBefore(header, clone.firstChild);
+
+                const inner = clone.querySelector('.result-inner');
+                if (inner) {
+                    inner.style.padding = '0 24px 24px';
+                    inner.style.display = 'flex';
+                    inner.style.flexDirection = 'column';
+                    inner.style.alignItems = 'flex-start';
+                    inner.style.width = '100%';
+                }
+
+                document.body.appendChild(clone);
+
+                await new Promise(r => setTimeout(r, 350));
+
+                const canvas = await html2canvas(clone, {
+                    scale: 2,
+                    backgroundColor: '#fff6f2',
+                    useCORS: true,
+                    logging: false,
+                    windowWidth: 800,
+                    onclone: (clonedDoc) => {
+                        const res = clonedDoc.getElementById('result-ui');
+                        if (res) {
+                            res.style.opacity = '1';
+                            res.style.animation = 'none';
+                        }
+                        clonedDoc.querySelectorAll('.chart-box, .rec-box').forEach(box => {
+                            box.style.background = 'rgba(255,255,255,0.92)';
+                        });
+                        const badge = clonedDoc.getElementById('profile-badge');
+                        if (badge) badge.style.textShadow = 'none';
+                    }
+                });
+
+                document.body.removeChild(clone);
+
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageW = pdf.internal.pageSize.getWidth();
+                const pageH = pdf.internal.pageSize.getHeight();
+                const margin = 10;
+                const usableW = pageW - margin * 2;
+                const imgW = usableW;
+                const imgH = (canvas.height * imgW) / canvas.width;
+
+                if (imgH <= pageH - margin * 2) {
+                    const y = margin;
+                    pdf.addImage(imgData, 'PNG', margin, y, imgW, imgH);
+                } else {
+                    let remainingH = imgH;
+                    let offsetY = 0;
+                    const pageContentH = pageH - margin * 2;
+
+                    while (remainingH > 0) {
+                        const sliceH = Math.min(pageContentH, remainingH);
+                        const sliceCanvas = document.createElement('canvas');
+                        sliceCanvas.width = canvas.width;
+                        sliceCanvas.height = (sliceH / imgH) * canvas.height;
+                        const sctx = sliceCanvas.getContext('2d');
+                        sctx.drawImage(
+                            canvas,
+                            0,
+                            (offsetY / imgH) * canvas.height,
+                            canvas.width,
+                            sliceCanvas.height,
+                            0, 0,
+                            canvas.width,
+                            sliceCanvas.height
+                        );
+                        const sliceData = sliceCanvas.toDataURL('image/png');
+                        if (offsetY > 0) pdf.addPage();
+                        pdf.addImage(sliceData, 'PNG', margin, margin, imgW, sliceH);
+                        offsetY += sliceH;
+                        remainingH -= sliceH;
+                    }
+                }
+
+                const data = new Date().toISOString().slice(0, 10);
+                pdf.save(`perfil_${data}.pdf`);
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível gerar o PDF. Tente novamente.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Baixar PDF';
+            }
+        }
+
+        const marsLink = document.getElementById('mars-link');
+        const marsTooltip = document.getElementById('mars-tooltip');
+        let tooltipTimer;
+        if (marsLink && marsTooltip) {
+            marsLink.addEventListener('mouseenter', () => {
+                clearTimeout(tooltipTimer);
+                marsTooltip.classList.add('show');
+            });
+            marsLink.addEventListener('mouseleave', () => {
+                tooltipTimer = setTimeout(() => marsTooltip.classList.remove('show'), 250);
+            });
+            marsLink.addEventListener('touchstart', () => {
+                marsTooltip.classList.add('show');
+                setTimeout(() => marsTooltip.classList.remove('show'), 2500);
+            }, { passive: true });
         }
     </script>
 </body>
