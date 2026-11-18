@@ -68,7 +68,6 @@
             justify-content: center;
         }
 
-        /* ===== INTRO: divisão mais equilibrada ===== */
         .page {
             position: absolute;
             inset: 0;
@@ -143,7 +142,7 @@
             letter-spacing: 0.02em;
             margin-top: 12px;
             line-height: 1.55;
-            max-width: 52ch;   /* era 38ch — agora ocupa melhor a coluna */
+            max-width: 52ch;
         }
 
         .video-stage {
@@ -190,7 +189,7 @@
             line-height: 1.7;
             color: var(--ink);
             font-weight: 400;
-            max-width: 52ch;   /* era 46ch */
+            max-width: 52ch;
         }
         .desc-lead strong { color: var(--accent); font-weight: 600; }
 
@@ -488,9 +487,56 @@
             color: #fff;
         }
 
-        /* ============================================================
-           RESULTADO — scrollbar colada na borda direita do card
-           ============================================================ */
+        /* ===== NOVO: campos de nome e idade na tela de identificação ===== */
+        .user-fields {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .user-input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .user-input-wrap label {
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .user-input {
+            font-family: var(--font-title);
+            font-size: 1rem;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border-strong);
+            border-radius: 11px;
+            background: rgba(255,255,255,0.6);
+            color: var(--ink);
+            outline: none;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+            width: 100%;
+        }
+        .user-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(194,0,0,0.1);
+            background: #fff;
+        }
+        .user-input.error {
+            border-color: var(--accent);
+            background: rgba(194,0,0,0.04);
+        }
+        .user-hint {
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            color: var(--muted);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
         .result-view {
             display: none;
             flex-direction: column;
@@ -500,9 +546,8 @@
             width: 100%;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 0;          /* zero: a scrollbar fica na borda */
+            padding: 0;
             margin: 0;
-            /* sem scrollbar-gutter: ele reservava espaço interno */
         }
         .result-view.is-active {
             display: flex;
@@ -514,8 +559,6 @@
             to   { opacity: 1; }
         }
 
-        /* Conteúdo interno: padding só à esquerda/baixo; o direito
-           é controlado para dar respiro sem mover a scrollbar */
         .result-inner {
             padding: 4px 18px 28px 4px;
             display: flex;
@@ -542,6 +585,28 @@
             margin: 4px 0 8px;
             text-shadow: 3px 3px 0 rgba(194,0,0,.12);
             animation: fadeIn 0.6s var(--ease-out-expo) 0.1s both;
+        }
+
+        .result-user {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .result-user strong {
+            color: var(--ink);
+            font-weight: 700;
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+        }
+        .result-user .dot {
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
         }
 
         .res-desc {
@@ -631,6 +696,54 @@
             left: 0;
             font-weight: 600;
         }
+
+        .contact-footer {
+            background: #fcf7f7;
+            color: #313131c4;
+            border-radius: 12px;
+            padding: 18px 20px;
+            width: 100%;
+            margin: 6px 0 14px;
+        }
+        .contact-footer .cf-title {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .contact-footer .cf-text {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            opacity: 0.95;
+            margin-bottom: 12px;
+        }
+        .contact-footer .cf-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .contact-footer .cf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.16);
+            border: 1.5px solid rgba(248, 144, 144, 0.664);
+            color: #b40909;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            text-decoration: none;
+            transition: background .2s, border-color .2s;
+            white-space: nowrap;
+        }
+        .contact-footer .cf-link:hover {
+            background: rgba(250, 103, 103, 0.425);
+            border-color: #af0505;
+        }
+        .contact-footer .cf-link i { font-size: 0.85rem; }
 
         .result-actions {
             display: flex;
@@ -828,6 +941,7 @@
             .question-text { font-size: 1rem; }
             .option-btn { padding: 10px 13px; font-size: 0.88rem; }
             .btn-nav { font-size: 0.7rem; padding: 7px 11px; }
+            .user-fields { grid-template-columns: 1fr; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -861,6 +975,7 @@
                 gap: 0;
             }
             .page--intro { display: none !important; }
+            .page--identify { display: none !important; }
             .game-header, .game-footer, .question-area { display: none !important; }
             .mars-link, .mars-tooltip, .restart-btn, .pdf-btn { display: none !important; }
             .result-view {
@@ -874,10 +989,11 @@
             .result-inner { padding: 0; }
             .profile-badge { text-shadow: none; }
             .chart-box canvas { height: 120px !important; max-height: 120px !important; }
-            .chart-box, .rec-box { break-inside: avoid; }
+            .chart-box, .rec-box, .contact-footer { break-inside: avoid; }
             .result-grid { gap: 10px; }
             .rec-box { padding: 10px 12px; margin-bottom: 10px; }
             .result-actions { display: none !important; }
+            .contact-footer { box-shadow: none; }
         }
     </style>
 </head>
@@ -904,7 +1020,7 @@
                     <video id="mars-video" autoplay muted playsinline preload="auto"
                            disablepictureinpicture disableremoteplayback
                            controlslist="nodownload nofullscreen noremoteplayback noplaybackrate">
-                        <source src="https://dididoingles.github.io/testyourenglish/marswarm.mp4" type="video/mp4">
+                        <source src="https://dididoingles.github.io/discoveryourprofile/sherlockmars1.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -927,7 +1043,52 @@
             </div>
         </div>
 
-        <!-- PÁGINA 2: TESTE + RESULTADO -->
+        <!-- PÁGINA 2: IDENTIFICAÇÃO (nome + idade) -->
+        <div class="page page--identify" id="page-identify">
+            <div class="test-card" style="grid-column: 1 / -1;">
+                <div class="game-header">
+                    <div class="brand">
+                        <span class="l">Antes de começar</span>
+                        <span class="s">// Mars × Lab</span>
+                    </div>
+                    <div class="progress-wrap">
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-count">0 / 12</span>
+                    </div>
+                </div>
+
+                <div class="question-area" style="padding-right: 4px;">
+                    <span class="level-tag"><i class="fa-solid fa-id-card"></i> Identificação</span>
+                    <p class="question-text">Como podemos te chamar?</p>
+
+                    <div class="user-fields">
+                        <div class="user-input-wrap">
+                            <label for="userName">Seu nome</label>
+                            <input type="text" id="userName" class="user-input" placeholder="Escreva aqui" maxlength="40" autocomplete="given-name">
+                        </div>
+                        <div class="user-input-wrap">
+                            <label for="userAge">Idade</label>
+                            <input type="number" id="userAge" class="user-input" placeholder="Ex.: 22" min="5" max="120" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <p class="user-hint">Usamos esses dados só para personalizar seu relatório. Nada é enviado para servidores.</p>
+                </div>
+
+                <div class="game-footer">
+                    <button class="btn-nav" onclick="backToIntro()">
+                        <i class="fa-solid fa-chevron-left"></i> anterior
+                    </button>
+                    <button class="btn-nav primary" onclick="goToTest()">
+                        iniciar teste <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 3: TESTE + RESULTADO -->
         <div class="page page--test" id="page-test">
             <div class="test-card" style="grid-column: 1 / -1;">
 
@@ -960,6 +1121,13 @@
                 <div id="result-ui" class="result-view">
                     <div class="result-inner">
                         <div class="res-label">Seu perfil </div>
+
+                        <div class="result-user" id="resultUser" style="display:none;">
+                            <strong id="resultUserName"></strong>
+                            <span class="dot"></span>
+                            <span id="resultUserAge"></span>
+                        </div>
+
                         <div id="profile-badge" class="profile-badge">--</div>
                         <p id="profile-desc" class="res-desc"></p>
 
@@ -982,6 +1150,19 @@
                         <div class="rec-box" id="recAvoid">
                             <h4><i class="fa-solid fa-triangle-exclamation"></i> O que evitar (e por quê)</h4>
                             <p id="avoidText"></p>
+                        </div>
+
+                        <div class="contact-footer" id="contactFooter">
+                            <div class="cf-title">Te ajudei a entender seu processo?</div>
+                            <div class="cf-text">Considere aprender comigo por um valor justo. Me chama pra conversar!</div>
+                            <div class="cf-links">
+                                <a class="cf-link" href="https://instagram.com/dicarvalho.prof" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-brands fa-instagram"></i> @dicarvalho.prof
+                                </a>
+                                <a class="cf-link" href="https://wa.me/5516993272278?text=Ol%C3%A1%21%20Fiz%20o%20teste%20de%20perfil%20de%20estudante%20e%20quero%20saber%20mais." target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-brands fa-whatsapp"></i> (16) 99327-2278
+                                </a>
+                            </div>
                         </div>
 
                         <div class="result-actions">
@@ -1019,16 +1200,70 @@
             video.addEventListener('contextmenu', e => e.preventDefault());
         })();
 
-        const pageIntro = document.getElementById('page-intro');
-        const pageTest  = document.getElementById('page-test');
+        const pageIntro    = document.getElementById('page-intro');
+        const pageIdentify = document.getElementById('page-identify');
+        const pageTest     = document.getElementById('page-test');
 
-        function showTestPage() {
-            pageIntro.classList.remove('is-active');
-            setTimeout(() => pageTest.classList.add('is-active'), 300);
+        function setActivePage(page) {
+            [pageIntro, pageIdentify, pageTest].forEach(p => {
+                if (p !== page) p.classList.remove('is-active');
+            });
+            if (page) page.classList.add('is-active');
         }
+
+        // Intro → Identificação
+        function startTest() {
+            setActivePage(pageIdentify);
+            // pequeno delay para dar tempo da transição de opacidade
+            setTimeout(() => {
+                const nameInput = document.getElementById('userName');
+                if (nameInput) nameInput.focus();
+            }, 350);
+        }
+
+        // Identificação → Intro
+        function backToIntro() {
+            setActivePage(pageIntro);
+        }
+
+        // Identificação → Teste (valida nome/idade)
+        function goToTest() {
+            const nameInput = document.getElementById('userName');
+            const ageInput  = document.getElementById('userAge');
+
+            const nameVal = nameInput.value.trim();
+            const ageVal  = ageInput.value.trim();
+            const ageNum  = parseInt(ageVal, 10);
+
+            nameInput.classList.remove('error');
+            ageInput.classList.remove('error');
+
+            let hasError = false;
+            if (!nameVal) { nameInput.classList.add('error'); hasError = true; }
+            if (!ageVal || isNaN(ageNum) || ageNum < 5 || ageNum > 120) {
+                ageInput.classList.add('error');
+                hasError = true;
+            }
+
+            if (hasError) {
+                if (!nameVal) { nameInput.focus(); return; }
+                ageInput.focus();
+                return;
+            }
+
+            userName = nameVal;
+            userAge  = String(ageNum);
+
+            setActivePage(pageTest);
+            setTimeout(() => {
+                document.getElementById('game-ui').style.display = 'flex';
+                document.getElementById('result-ui').classList.remove('is-active');
+                render();
+            }, 320);
+        }
+
         function showIntroPage() {
-            pageTest.classList.remove('is-active');
-            setTimeout(() => pageIntro.classList.add('is-active'), 300);
+            setActivePage(pageIntro);
         }
 
         const questions = [
@@ -1159,21 +1394,21 @@
         const letters = ['A', 'B', 'C', 'D'];
         let isTransitioning = false;
 
-        function startTest() {
-            showTestPage();
-            setTimeout(() => {
-                document.getElementById('game-ui').style.display = 'flex';
-                document.getElementById('result-ui').classList.remove('is-active');
-                render();
-            }, 320);
-        }
+        let userName = '';
+        let userAge  = '';
 
         function resetTest() {
             current = 0;
             answers = Array(questions.length).fill(null);
             isTransitioning = false;
+            userName = '';
+            userAge = '';
+            const nameInput = document.getElementById('userName');
+            const ageInput  = document.getElementById('userAge');
+            if (nameInput) { nameInput.value = ''; nameInput.classList.remove('error'); }
+            if (ageInput)  { ageInput.value  = ''; ageInput.classList.remove('error'); }
             document.getElementById('progress-fill').style.width = '0%';
-            showIntroPage();
+            setActivePage(pageIntro);
             setTimeout(() => {
                 document.getElementById('game-ui').style.display = 'none';
                 document.getElementById('result-ui').classList.remove('is-active');
@@ -1338,8 +1573,21 @@
             document.getElementById('avoidText').innerText = avoid;
             document.getElementById('recList').innerHTML = activities.map(a => `<li>${a}</li>`).join('');
 
+            const resultUser = document.getElementById('resultUser');
+            const resultUserName = document.getElementById('resultUserName');
+            const resultUserAge = document.getElementById('resultUserAge');
+            if (userName && userAge) {
+                resultUserName.textContent = userName;
+                resultUserAge.textContent = `${userAge} anos`;
+                resultUser.style.display = 'inline-flex';
+            } else {
+                resultUser.style.display = 'none';
+            }
+
             lastResult = {
                 badge, desc, avoid, activities,
+                userName,
+                userAge,
                 dims: {
                     retrieval: dimRetrieval,
                     spacing: dimSpacing,
@@ -1431,9 +1679,6 @@
             }, 100);
         }
 
-        /* ============================================================
-           BAIXAR PDF — inclui título, gráficos como imagem e conteúdo
-           ============================================================ */
         async function baixarPDF() {
             const btn = document.getElementById('btnPdf');
             if (!lastResult) return;
@@ -1444,107 +1689,41 @@
             try {
                 const { jsPDF } = window.jspdf;
 
-                const balanceCanvas = document.getElementById('chartBalance');
-                const impactCanvas  = document.getElementById('chartImpact');
-                const balanceImg = balanceCanvas.toDataURL('image/png');
-                const impactImg  = impactCanvas.toDataURL('image/png');
+                const balanceImg = document.getElementById('chartBalance').toDataURL('image/png');
+                const impactImg  = document.getElementById('chartImpact').toDataURL('image/png');
 
-                const resultEl = document.getElementById('result-ui');
-                const clone = resultEl.cloneNode(true);
-                clone.style.position = 'fixed';
-                clone.style.left = '-9999px';
-                clone.style.top = '0';
-                clone.style.width = '800px';
-                clone.style.height = 'auto';
-                clone.style.maxHeight = 'none';
-                clone.style.overflow = 'visible';
-                clone.style.padding = '0';
-                clone.style.margin = '0';
-                clone.style.background = '#fff6f2';
-                clone.style.display = 'flex';
-                clone.style.border = 'none';
-                clone.style.borderRadius = '0';
-                clone.querySelectorAll('.result-actions').forEach(el => el.remove());
+                const doc = buildPdfDocument(lastResult, balanceImg, impactImg);
 
-                const cloneBalance = clone.querySelector('#chartBalance');
-                const cloneImpact  = clone.querySelector('#chartImpact');
-                if (cloneBalance) {
-                    const img = document.createElement('img');
-                    img.src = balanceImg;
-                    img.style.width = '100%';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'contain';
-                    img.style.display = 'block';
-                    cloneBalance.replaceWith(img);
+                doc.style.position = 'fixed';
+                doc.style.left = '-9999px';
+                doc.style.top = '0';
+                document.body.appendChild(doc);
+
+                if (document.fonts && document.fonts.ready) {
+                    try { await document.fonts.ready; } catch (e) {}
                 }
-                if (cloneImpact) {
-                    const img = document.createElement('img');
-                    img.src = impactImg;
-                    img.style.width = '100%';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'contain';
-                    img.style.display = 'block';
-                    cloneImpact.replaceWith(img);
-                }
+                await new Promise(r => setTimeout(r, 300));
 
-                const header = document.createElement('div');
-                header.style.padding = '20px 24px 10px';
-                header.style.borderBottom = '2px solid #c20000';
-                header.style.marginBottom = '16px';
-                header.innerHTML = `
-                    <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#c20000;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;">Mars Education</div>
-                    <div style="font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;color:#222;letter-spacing:-.04em;line-height:1.1;">Perfil do <span style="color:#c20000;">estudante</span></div>
-                    <div style="font-family:'Space Mono',monospace;font-size:11px;color:#6b5252;margin-top:6px;">Seu perfil de aprendizagem de inglês</div>
-                `;
-                clone.insertBefore(header, clone.firstChild);
-
-                const inner = clone.querySelector('.result-inner');
-                if (inner) {
-                    inner.style.padding = '0 24px 24px';
-                    inner.style.display = 'flex';
-                    inner.style.flexDirection = 'column';
-                    inner.style.alignItems = 'flex-start';
-                    inner.style.width = '100%';
-                }
-
-                document.body.appendChild(clone);
-
-                await new Promise(r => setTimeout(r, 350));
-
-                const canvas = await html2canvas(clone, {
+                const canvas = await html2canvas(doc, {
                     scale: 2,
-                    backgroundColor: '#fff6f2',
+                    backgroundColor: '#ffffff',
                     useCORS: true,
                     logging: false,
-                    windowWidth: 800,
-                    onclone: (clonedDoc) => {
-                        const res = clonedDoc.getElementById('result-ui');
-                        if (res) {
-                            res.style.opacity = '1';
-                            res.style.animation = 'none';
-                        }
-                        clonedDoc.querySelectorAll('.chart-box, .rec-box').forEach(box => {
-                            box.style.background = 'rgba(255,255,255,0.92)';
-                        });
-                        const badge = clonedDoc.getElementById('profile-badge');
-                        if (badge) badge.style.textShadow = 'none';
-                    }
+                    windowWidth: 800
                 });
 
-                document.body.removeChild(clone);
+                document.body.removeChild(doc);
 
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const pageW = pdf.internal.pageSize.getWidth();
                 const pageH = pdf.internal.pageSize.getHeight();
                 const margin = 10;
-                const usableW = pageW - margin * 2;
-                const imgW = usableW;
+                const imgW = pageW - margin * 2;
                 const imgH = (canvas.height * imgW) / canvas.width;
 
                 if (imgH <= pageH - margin * 2) {
-                    const y = margin;
-                    pdf.addImage(imgData, 'PNG', margin, y, imgW, imgH);
+                    pdf.addImage(imgData, 'PNG', margin, margin, imgW, imgH);
                 } else {
                     let remainingH = imgH;
                     let offsetY = 0;
@@ -1575,7 +1754,12 @@
                 }
 
                 const data = new Date().toISOString().slice(0, 10);
-                pdf.save(`perfil_${data}.pdf`);
+                const safeName = (lastResult.userName || 'perfil')
+                    .toLowerCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '') || 'perfil';
+                pdf.save(`perfil-${safeName}-${data}.pdf`);
             } catch (err) {
                 console.error(err);
                 alert('Não foi possível gerar o PDF. Tente novamente.');
@@ -1583,6 +1767,156 @@
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Baixar PDF';
             }
+        }
+
+        function buildPdfDocument(result, balanceImg, impactImg) {
+            const wrap = document.createElement('div');
+            wrap.style.cssText = `
+                width: 760px;
+                padding: 32px 32px 40px;
+                background: #ffffff;
+                font-family: 'Poppins', sans-serif;
+                color: #222222;
+                box-sizing: border-box;
+            `;
+
+            const dimLabels = {
+                retrieval: 'Recuperação',
+                spacing: 'Espaçamento',
+                interleaving: 'Interleaving',
+                multisensory: 'Multissensorial',
+                production: 'Produção',
+                error: 'Erro',
+                active: 'Ativo',
+                elaboration: 'Elaboração',
+                metacognition: 'Metacognição',
+                consistency: 'Consistência'
+            };
+
+            const barRow = (label, value) => `
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                    <span style="font-family:'Space Mono',monospace;font-size:9px;color:#222;
+                                 width:110px;text-align:right;flex-shrink:0;">${label}</span>
+                    <div style="flex:1;height:10px;background:#eeeeee;border-radius:3px;overflow:hidden;">
+                        <div style="width:${Math.round(value)}%;height:100%;background:#c20000;"></div>
+                    </div>
+                    <span style="font-family:'Space Mono',monospace;font-size:9px;color:#222;
+                                 width:36px;flex-shrink:0;">${Math.round(value)}%</span>
+                </div>
+            `;
+
+            const activitiesHtml = result.activities.map(a => `
+                <li style="font-size:12px;color:#222;line-height:1.55;margin-bottom:7px;
+                           padding-left:16px;position:relative;">
+                    <span style="position:absolute;left:0;color:#c20000;font-weight:600;">→</span>${a}
+                </li>
+            `).join('');
+
+            const userLineHtml = (result.userName && result.userAge)
+                ? `<div style="font-family:'Space Mono',monospace;font-size:11px;color:#6b5252;
+                              margin-bottom:18px;">
+                       <strong style="color:#222;font-family:'Poppins',sans-serif;font-size:13px;">
+                           ${result.userName}
+                       </strong>
+                       <span style="color:#c20000;"> · </span>
+                       ${result.userAge} anos
+                   </div>`
+                : '';
+
+            wrap.innerHTML = `
+                <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;
+                            color:#c20000;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px;">
+                    Mars Education
+                </div>
+                <h1 style="font-size:28px;font-weight:700;color:#222;letter-spacing:-.04em;
+                           line-height:1.1;margin:0 0 4px;">
+                    Perfil do <span style="color:#c20000;">estudante</span>
+                </h1>
+                <div style="font-family:'Space Mono',monospace;font-size:11px;color:#6b5252;
+                            margin-bottom:14px;">
+                    Inglês · ${new Date().toLocaleDateString('pt-BR')}
+                </div>
+
+                ${userLineHtml}
+
+                <div style="font-family:'Space Mono',monospace;font-size:10px;color:#6b5252;
+                            text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;">
+                    Seu perfil
+                </div>
+                <h2 style="font-size:32px;font-weight:700;color:#c20000;letter-spacing:-.03em;
+                           line-height:1.15;margin:0 0 12px;">
+                    ${result.badge}
+                </h2>
+                <p style="font-size:13px;color:#333;line-height:1.65;margin:0 0 24px;max-width:60ch;">
+                    ${result.desc}
+                </p>
+
+                <h3 style="font-family:'Space Mono',monospace;font-size:11px;color:#c20000;
+                           text-transform:uppercase;letter-spacing:.1em;margin:0 0 12px;">
+                    Gráficos
+                </h3>
+                <div style="display:flex;gap:16px;margin-bottom:24px;">
+                    <div style="flex:1;border:1px solid #cccccc;border-radius:10px;padding:10px;
+                                background:#ffffff;">
+                        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#6b5252;
+                                    text-transform:uppercase;letter-spacing:.08em;text-align:center;
+                                    margin-bottom:6px;">Equilíbrio de práticas</div>
+                        <img src="${balanceImg}" style="width:100%;height:150px;object-fit:contain;display:block;">
+                    </div>
+                    <div style="flex:1;border:1px solid #cccccc;border-radius:10px;padding:10px;
+                                background:#ffffff;">
+                        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#6b5252;
+                                    text-transform:uppercase;letter-spacing:.08em;text-align:center;
+                                    margin-bottom:6px;">Potencial de impacto</div>
+                        <img src="${impactImg}" style="width:100%;height:150px;object-fit:contain;display:block;">
+                    </div>
+                </div>
+
+                <h3 style="font-family:'Space Mono',monospace;font-size:11px;color:#c20000;
+                           text-transform:uppercase;letter-spacing:.1em;margin:0 0 12px;">
+                    Atividades de maior impacto para você
+                </h3>
+                <ul style="list-style:none;padding:0;margin:0 0 24px;">
+                    ${activitiesHtml}
+                </ul>
+
+                <h3 style="font-family:'Space Mono',monospace;font-size:11px;color:#c20000;
+                           text-transform:uppercase;letter-spacing:.1em;margin:0 0 12px;">
+                    O que evitar (e por quê)
+                </h3>
+                <p style="font-size:13px;color:#222;line-height:1.65;margin:0 0 24px;max-width:60ch;">
+                    ${result.avoid}
+                </p>
+
+                <h3 style="font-family:'Space Mono',monospace;font-size:11px;color:#c20000;
+                           text-transform:uppercase;letter-spacing:.1em;margin:0 0 12px;">
+                    Detalhamento por dimensão
+                </h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-bottom:24px;">
+                    ${Object.entries(result.dims).map(([k, v]) => barRow(dimLabels[k] || k, v)).join('')}
+                </div>
+
+                <div style="border-top: 1px solid #dddddd; padding-top: 14px; margin-top: 24px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 11px; font-weight: 600; color: #222222; margin-bottom: 2px;">
+                            Mars Education · Perfil do Estudante
+                        </div>
+                        <div style="font-size: 9px; color: #6b5252;">
+                            Te ajudei a entender seu processo? Considere estudar comigo por um valor justo.
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <span style="font-family:'Space Mono',monospace; font-size:9px; color:#6b5252; background:#f5f5f5; border:1px solid #dddddd; padding:4px 8px; border-radius:6px;">
+                            @dicarvalho.prof
+                        </span>
+                        <span style="font-family:'Space Mono',monospace; font-size:9px; color:#6b5252; background:#f5f5f5; border:1px solid #dddddd; padding:4px 8px; border-radius:6px;">
+                            (16) 99327-2278
+                        </span>
+                    </div>
+                </div>
+
+                `;
+            return wrap;
         }
 
         const marsLink = document.getElementById('mars-link');
@@ -1601,6 +1935,14 @@
                 setTimeout(() => marsTooltip.classList.remove('show'), 2500);
             }, { passive: true });
         }
+
+        // Enter nos campos de identificação → inicia o teste
+        ['userName', 'userAge'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') { e.preventDefault(); goToTest(); }
+            });
+        });
     </script>
 </body>
 </html>
